@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { client } from "../../lib/sanity";
 
-async function getData(category: string) {
+async function getData(category) {
   const query = `*[_type == "product" && category->name == "${category}"]{
   _id,
     price,
@@ -17,11 +17,7 @@ async function getData(category: string) {
   return data;
 }
 
-export default async function CategoryPage({
-  params,
-}: {
-  params: { category: string };
-}) {
+export default async function CategoryPage({ params }) {
   const data = await getData(params.category);
 
   return (
@@ -34,7 +30,7 @@ export default async function CategoryPage({
         </div>
 
         <div className="mt-6 grid grid-cols-1 gap-y-8 gap-x-6 gap-7-10 lg:grid-cols-4 xl:gap-x-8">
-          {data.map((product: any) => (
+          {data.map((product) => (
             <div key={product._id} className="group relative p-2 shadow-md ">
               <div className="aspect-square w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:h-80">
                 <Image

@@ -1,11 +1,18 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { BsMinecartLoaded, BsSearch } from "react-icons/bs";
 import { CiHeart } from "react-icons/ci";
 import MobileSideBar from "./mobile-sidebar";
+import { useStateContext } from "@/context/StateContext";
+import CartModal from "./cart-modal";
 
 export default function Navbar() {
+  const { totalQuantities } = useStateContext();
+  console.log(totalQuantities);
+
   return (
     <div className="w-full mx-auto z-[50]  top-0 sticky shadow-md  bg-white ">
       <div className="w-full flex items-center justify-center py-2 bg-[#EBE3D5] ">
@@ -75,29 +82,47 @@ export default function Navbar() {
               SHEIN
             </Link>
 
-            <Link className="text-[15px] text-center hover:underline" href="/ANKARA">
+            <Link
+              className="text-[15px] text-center hover:underline"
+              href="/ANKARA"
+            >
               ANKARA
             </Link>
-            <Link className="text-[15px] text-center hover:underline " href="/RTW">
+            <Link
+              className="text-[15px] text-center hover:underline "
+              href="/RTW"
+            >
               READY TO WEAR
             </Link>
-            <Link className="text-[15px] text-center hover:underline " href="/FASHION">
+            <Link
+              className="text-[15px] text-center hover:underline "
+              href="/FASHION"
+            >
               FASHION ITEMS
             </Link>
-            <Link className="text-[15px] text-center  hover:underline" href="/GIFTS">
+            <Link
+              className="text-[15px] text-center  hover:underline"
+              href="/GIFTS"
+            >
               HOME APPLIANCES & GIFTS
             </Link>
           </div>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center justify-between gap-4">
           {/* <IoIosHeartEmpty className="text-mainText  flex  text-[20px] " />{" "} */}
           {/* <BsPerson className="text-[#000] flex text-[20px]" /> */}
-          <CiHeart className="text-[#000] text-[25px]" />
-          <Link href="/cart">
-            {" "}
-            <BsMinecartLoaded className="text-[#000] text-[20px]" />
-          </Link>
+          <CiHeart className="text-[#000] text-[25px]" />{" "}
+          <div className="flex items-center relative">
+            <CartModal />
+            <span
+              className={`bg-[#f02d34] ${
+                totalQuantities <= 0 && "hidden"
+              } text-[#eee]  absolute top-[-5px]  right-[-1px] text-center w-[18px] font-bold h-[18px] text-[12px] rounded-[50%] `}
+            >
+              {totalQuantities}
+            </span>
+          </div>
         </div>
       </div>
     </div>
