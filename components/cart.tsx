@@ -14,6 +14,7 @@ import { urlFor } from "@/lib/sanity";
 import { Button } from "./ui/button";
 import Image from "next/image";
 import { FaMinus, FaPlus } from "react-icons/fa6";
+import { SheetClose } from "./ui/sheet";
 
 export default function Cart() {
   const cartRef = useRef(null);
@@ -32,22 +33,23 @@ export default function Cart() {
         <div className="flex mt-[30px] items-center justify-center gap-4">
           {" "}
           <p className="text-18px font-bold">Your Cart</p>{" "}
-          <p className="text-[#776B5D] text-[16px] ">({totalQuantities}) </p>
         </div>
 
         {cartItems.length < 1 && (
           <div className="flex gap-4 mt-[30px] flex-col items-center justify-center">
             <h1 className=" text-xl font-bold uppercase">
-              Your Cart feels lonely.
+              It feels lonely.
             </h1>
             <p className="text-sm text-center px-10 -mt-2">
               Your Shopping cart lives to serve. Give it purpose - fill it up
               and make it happy.
             </p>
 
-            <Link className="w-full mt-8" href="/">
-              <Button className="w-full">Continue Shopping</Button>
-            </Link>
+            <SheetClose asChild>
+              <Link className="w-full mt-8" href="/">
+                <Button className="w-full">Continue Shopping</Button>
+              </Link>
+            </SheetClose>
           </div>
         )}
 
@@ -74,7 +76,7 @@ export default function Cart() {
                     <Button
                       onClick={() => onRemove(item)}
                       variant="outline"
-                      className="flex border-none items-center rounded-[50%] text-red-500"
+                      className="flex border-none hover:bg-white items-center rounded-[50%] text-red-500"
                     >
                       <TiDeleteOutline />
                     </Button>
@@ -106,13 +108,19 @@ export default function Cart() {
           <div className="absolute bottom-[12px] right-[5px w-full py-[65px] px-[20px] ">
             <div className="flex flex-col mt-8 gap-2 items-center w-full">
               <Link className="w-full" href="/delivery/delivery-details">
-                <Button className="w-full text-[#000] flex gap-3">
-                  Pay <h3>₦{totalPrice.toLocaleString("en-US")} </h3>
-                </Button>
+                <SheetClose asChild>
+                  <Button className="w-full text-[#000] flex gap-3">
+                    Pay <h3>₦{totalPrice.toLocaleString("en-US")} </h3>
+                  </Button>
+                </SheetClose>
               </Link>
-              <Button variant="secondary" className="w-full">
-                Continue Shopping
-              </Button>
+              <Link className="w-full" href="/">
+                <SheetClose asChild>
+                  <Button variant="secondary" className="w-full">
+                    Continue Shopping
+                  </Button>
+                </SheetClose>
+              </Link>
             </div>
           </div>
         )}
