@@ -25,7 +25,7 @@ export default async function Newest() {
       <div className="mx-auto px-4 py-8   w-full lg:px-2">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold tracking-tight  text-gray-900 ">
-             Newest Products
+            Newest Products
           </h2>
 
           <Link className="text-primary flex items-center gap-x-1" href="/shop">
@@ -40,7 +40,9 @@ export default async function Newest() {
               key={product._id}
               className="group relative p-2 shadow-md "
             >
-              <div className="aspect-square w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:h-80">
+              <div
+                className={`aspect-square w-full overflow-hidden  rounded-md bg-gray-200  lg:h-80`}
+              >
                 <Image
                   width={800}
                   height={800}

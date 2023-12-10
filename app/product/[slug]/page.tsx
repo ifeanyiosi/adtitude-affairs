@@ -1,6 +1,6 @@
 import ImageGallery from "@/components/image-gallery";
 import { Button } from "@/components/ui/button";
-import { CiStar } from "react-icons/ci";
+import { CiHeart, CiStar } from "react-icons/ci";
 
 import { FaTruck } from "react-icons/fa";
 import React from "react";
@@ -9,6 +9,7 @@ import { client } from "@/lib/sanity";
 
 import Quantity from "@/components/quantity";
 import AddToCartButton from "@/components/add-to-cart";
+import AddToWishlist from "@/components/add-to-wishlist";
 
 async function getData(slug: string) {
   const query = `*[_type == "product" && slug.current == "${slug}" ][0]{
@@ -50,6 +51,7 @@ export default async function ProductPage({
               <h2 className="text-2xl font-bold text-gray-800 lg:text-3xl ">
                 {data.name}
               </h2>
+              <AddToWishlist product={data} />
             </div>
 
             <div className="my-6 flex items-center gap-2 md:mb-10">

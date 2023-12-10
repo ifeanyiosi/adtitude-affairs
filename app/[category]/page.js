@@ -31,7 +31,11 @@ export default async function CategoryPage({ params }) {
 
         <div className="mt-6 grid grid-cols-1 gap-y-8 gap-x-6 gap-7-10 lg:grid-cols-4 xl:gap-x-8">
           {data.map((product) => (
-            <div key={product._id} className="group relative p-2 shadow-md ">
+            <Link
+              href={`/product/${product.slug}`}
+              key={product._id}
+              className="group relative p-2 shadow-md "
+            >
               <div className="aspect-square w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:h-80">
                 <Image
                   width={300}
@@ -59,7 +63,7 @@ export default async function CategoryPage({ params }) {
                   </p>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

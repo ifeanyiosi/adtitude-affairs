@@ -25,7 +25,7 @@ export default function Cart() {
     toggleCartItemQuanitity,
     onRemove,
   } = useStateContext();
-  console.log(cartItems);
+  
 
   return (
     <div ref={cartRef} className="w-full ">
@@ -109,7 +109,7 @@ export default function Cart() {
             <div className="flex flex-col mt-8 gap-2 items-center w-full">
               <Link className="w-full" href="/delivery/delivery-details">
                 <SheetClose asChild>
-                  <Button className="w-full text-[#000] flex gap-3">
+                  <Button className="w-full text-[#fff] flex gap-3">
                     Pay <h3>₦{totalPrice.toLocaleString("en-US")} </h3>
                   </Button>
                 </SheetClose>

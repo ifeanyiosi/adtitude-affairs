@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
@@ -11,9 +11,32 @@ export const StateContext = ({ children }) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalQuantities, setTotalQuantities] = useState(0);
   const [qty, setQty] = useState(1);
+  const [wishlistItems, setWishlistItems] = useState([]);
 
   let foundProduct;
   let index;
+
+  const addWish = (product) => {
+    const checkProductInWishlist = wishlistItems.find(
+      (item) => item._id === product._id
+    );
+
+    if (!checkProductInWishlist) {
+      setWishlistItems([...wishlistItems, { ...product }]);
+      toast.success(`${product.name} added to your wishlist.`);
+    } else {
+      toast.info(`${product.name} is already in your wishlist.`);
+    }
+  };
+
+  const removeWish = (product) => {
+    const updatedWishlist = wishlistItems.filter(
+      (item) => item._id !== product._id
+    );
+
+    setWishlistItems(updatedWishlist);
+    toast.success(`${product.name} removed from your wishlist.`);
+  };
 
   const onAdd = (product, quantity) => {
     const checkProductInCart = cartItems.find(
@@ -94,6 +117,23 @@ export const StateContext = ({ children }) => {
     });
   };
 
+  useEffect(() => {
+    const savedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    const savedWishlistItems =
+      JSON.parse(localStorage.getItem("wishlistItems")) || [];
+
+    setCartItems(savedCartItems);
+    setWishlistItems(savedWishlistItems);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  useEffect(() => {
+    localStorage.setItem("wishlistItems", JSON.stringify(wishlistItems));
+  }, [wishlistItems]);
+
   return (
     <Context.Provider
       value={{
@@ -111,6 +151,9 @@ export const StateContext = ({ children }) => {
         setCartItems,
         setTotalPrice,
         setTotalQuantities,
+        addWish,
+        wishlistItems,
+        removeWish,
       }}
     >
       {children}

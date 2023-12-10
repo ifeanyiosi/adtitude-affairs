@@ -16,6 +16,8 @@ import { Button } from "@/components/ui/button";
 import { z } from "zod";
 import { DeliveryValidation } from "@/lib/validations/delivery";
 import Link from "next/link";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import StateSelect from "@/components/state-select";
 
 export default function DeliveryDetails() {
   const form = useForm({
@@ -130,45 +132,30 @@ export default function DeliveryDetails() {
               )}
             />
 
-            <FormField
-              control={form.control}
-              name="deliveryMethod"
-              render={({ field }) => (
-                <FormItem className="flex flex-col  w-full">
-                  <FormLabel className="text-base-semibold text-light-2">
-                    Delivery Method
-                  </FormLabel>
-                  <FormControl className="">
-                    <Input
-                      className="account-form_input no-focus"
-                      placeholder=""
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <FormItem className="space-y-3">
+              <FormLabel className="text-base-semibold text-light-2">
+                Delivery method.
+              </FormLabel>
+              <FormControl>
+                <RadioGroup className="flex flex-col space-y-1">
+                  <FormItem className="flex items-center space-x-3 space-y-0">
+                    <FormControl>
+                      <RadioGroupItem value="mentions" />
+                    </FormControl>
+                    <FormLabel className="font-normal">Pick Up</FormLabel>
+                  </FormItem>
+                  <FormItem className="flex items-center space-x-3 space-y-0">
+                    <FormControl>
+                      <RadioGroupItem value="none" />
+                    </FormControl>
+                    <FormLabel className="font-normal">Delivery</FormLabel>
+                  </FormItem>
+                </RadioGroup>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
 
-            <FormField
-              control={form.control}
-              name="location"
-              render={({ field }) => (
-                <FormItem className="flex flex-col  w-full">
-                  <FormLabel className="text-base-semibold text-light-2">
-                    Location
-                  </FormLabel>
-                  <FormControl className="">
-                    <Input
-                      className="account-form_input no-focus"
-                      placeholder=""
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <StateSelect />
 
             <FormField
               control={form.control}
@@ -177,26 +164,6 @@ export default function DeliveryDetails() {
                 <FormItem className="flex flex-col  w-full">
                   <FormLabel className="text-base-semibold text-light-2">
                     Address
-                  </FormLabel>
-                  <FormControl className="">
-                    <Input
-                      className="account-form_input no-focus"
-                      placeholder=""
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="expectedDeliveryDate"
-              render={({ field }) => (
-                <FormItem className="flex flex-col  w-full">
-                  <FormLabel className="text-base-semibold text-light-2">
-                    Expected Delivery Date
                   </FormLabel>
                   <FormControl className="">
                     <Input

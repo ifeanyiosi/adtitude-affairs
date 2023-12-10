@@ -112,7 +112,9 @@ export default function Navbar() {
         <div className="flex items-center justify-between gap-4">
           {/* <IoIosHeartEmpty className="text-mainText  flex  text-[20px] " />{" "} */}
           {/* <BsPerson className="text-[#000] flex text-[20px]" /> */}
-          <CiHeart className="text-[#000] text-[25px]" />{" "}
+          <Link href="/wishlist">
+            <CiHeart className="text-[#000] text-[25px]" />
+          </Link>
           <div className="flex items-center relative">
             <CartModal />
             <span
